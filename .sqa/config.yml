@@ -1,0 +1,60 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/o3webapp:
+      branch: main
+      repo: https://github.com/EOSC-synergy/o3webapp
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/o3webapp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-amber-gecko.sh
+        container: qc.acc_zippy-gamboge-bulldog
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/o3webapp find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-sangria-dragonfly.sh
+        container: qc.doc_zippy-brown-cat
+      github.com/EOSC-synergy/o3webapp git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-lavender-cheetah.sh
+        container: qc.doc_scaly-ochre-kiwi
+      github.com/EOSC-synergy/o3webapp markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-brass-tapir.sh
+        container: qc.doc_paltry-cobalt-goat
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/o3webapp licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.cranky-green-dugong.sh
+        container: qc.lic_muzzy-malachite-schnauzer
+  QC.Sty:
+    repos:
+      github.com/EOSC-synergy/o3webapp hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-saffron-jellyfish.sh
+        container: qc.sty_snoopy-eggplant-saola
+      github.com/EOSC-synergy/o3webapp jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-amethyst-lemming.sh
+        container: qc.sty_silly-carmine-ray
+      github.com/EOSC-synergy/o3webapp stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-xanthic-pig.sh
+        container: qc.sty_shaggy-taupe-kangaroo
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/o3webapp get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-cardinal-uguisu.sh
+        container: qc.ver_scaly-lavender-millipede
+timeout: 1800
